@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+        "name": "client",
+        "image": "yehuizhang/dk-fib-client",
+        "hostname": "client",
+        "essential": false
+        },
+        {
+            "name": "server",
+            "image": "yehuizhang/dk-fib-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "yehuizhang/dk-fib-worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "yehuizhang/dk-fib-nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort" : 80
+                }
+            ],
+            "links": [
+                "client",
+                "server"
+            ]
+        }
+    ]
+  }
