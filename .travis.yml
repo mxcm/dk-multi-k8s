@@ -18,17 +18,15 @@ after_success:
   - docker push "$DOCKER_ID"/dk-fib-nginx
   - docker push "$DOCKER_ID"/dk-fib-server
   - docker push "$DOCKER_ID"/dk-fib-worker
-
-
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "us-west-1"
-#   app: "dk-react"
-#   env: "DkReact-env"
-#   bucket_name: "elasticbeanstalk-us-west-1-722739487944"
-#   bucket_path: "dk-react"
-#   on:
-#     branch: master
-#   access_key_id: "$AWS_ACCESS_KEY"
-#   secret_access_key:
-#     secure: "$AWS_SECRET_KEY"
+deploy:
+  provider: elasticbeanstalk
+  region: us-west-1
+  app: dk-fibonacci
+  env: DkFibonacci-env
+  bucket_name: elasticbeanstalk-us-west-1-722739487944
+  bucket_path: dk-fibonacci
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
