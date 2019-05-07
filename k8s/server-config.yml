@@ -33,7 +33,7 @@ spec:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: gpassword
+                  name: pgpassword
                   key: PGPASSWORD
 ---
 apiVersion: v1
