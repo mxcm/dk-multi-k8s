@@ -83,3 +83,9 @@ One helpful [link](https://cloud.google.com/solutions/continuous-delivery-with-t
 3. Create pull request. Wait to get approved by travis-ci. 
 4. Merge feature branch to master.
 5. Check changes on production.
+
+## Cleanup
+
+1. Start/stop minikube `minikube start` & `minikube stop`
+2. Stop containers `docker ps` & `docker stop <container_id>`
+3. Clear docker cache. `docker system prune`
