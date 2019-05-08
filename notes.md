@@ -75,3 +75,11 @@ One helpful [link](https://cloud.google.com/solutions/continuous-delivery-with-t
         - `helm init --service-account tiller --upgrade`
         - `helm install stable/nginx-ingress --name my-nginx --set rbac.create=true`
 11. Deploy! Commit and push to github.
+
+## Update in production
+
+1. Checkout a feature branch
+2. Make changes, commit and push to github.
+3. Create pull request. Wait to get approved by travis-ci. 
+4. Merge feature branch to master.
+5. Check changes on production.
