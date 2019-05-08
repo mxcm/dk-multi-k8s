@@ -39,3 +39,20 @@ kubectl set image deployment/<name> <container_name>=<image_name>:<tag>
 
 minikube dashboard
 `minikube dashboard`
+
+## Google Cloud Instructions
+
+One helpful [link](https://cloud.google.com/solutions/continuous-delivery-with-travis-ci#create_a_service_account)
+
+### Install travis cli
+
+1. Create ruby container. Also set the current directory as volume for the container to access the credential.
+`docker run -it -v $(pwd):/volume-local ruby:2.3 sh`
+2. Install travis cli
+`gem install travis`
+3. Log in to Travis CI.
+`travis login` or `travis login --pro` if using travis-ci.com (pro version)
+4. Enter github account to login
+5. Encrypt the credential json file locally
+`travis encrypt-file service-account.json -r mxcm/dk-multi-k8s`
+6. move the `openssl` command into the travis.yml file under `before_install` section. 
