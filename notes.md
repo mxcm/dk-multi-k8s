@@ -56,3 +56,22 @@ One helpful [link](https://cloud.google.com/solutions/continuous-delivery-with-t
 5. Encrypt the credential json file locally
 `travis encrypt-file service-account.json -r mxcm/dk-multi-k8s`
 6. move the `openssl` command into the travis.yml file under `before_install` section. 
+7. Add configures in `.travis.yml`.
+8. Add docker hub `$DOCKER_USERNAME` and `$DOCKER_PASSWORD` in repo setting of travis-ci.org.
+    - Use the git commit's SHA as the version number of the docker image for better identification and updating. 
+9. setup PGPASSWORD on GoogleCloud shell. 
+    - `gcloud config set conpute/zone us-west1-a`
+    - `gcloud container clusters get-credentials multi-k8s-cluster`
+    - `kubectl create secret generic pgpassword --from-literal PGPASSWORD=mypassword`
+10. Install nginx-ingress
+    - [Instruction](https://kubernetes.github.io/ingress-nginx/deploy/#using-helm)
+    - [Install heml](https://helm.sh/docs/using_helm/#from-script) on Google Cloud shell
+        - `curl -LO https://git.io/get_helm.sh`
+        - `chmod 700 get_helm.sh`
+        - `./get_helm.sh`
+        - [Special setup for Google cloud](https://helm.sh/docs/using_helm/#gke)
+        - `kubectl create serviceaccount --namespace kube-system tiller`
+        - `kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller`
+        - `helm init --service-account tiller --upgrade`
+        - `helm install stable/nginx-ingress --name my-nginx --set rbac.create=true`
+11. Deploy! Commit and push to github.
